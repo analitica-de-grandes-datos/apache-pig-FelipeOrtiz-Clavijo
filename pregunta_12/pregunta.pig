@@ -26,4 +26,7 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-
+A = LOAD '_12/data.csv' USING PigStorage(',') AS (id:int, firstname:chararray, lastname:chararray, birthday:chararray, color:chararray, level:int);
+B = FILTER A BY lastname MATCHES '[defghijkDEFGHIJK].*';
+C = FOREACH B generate lastname;
+STORE C into 'output/q12.out';

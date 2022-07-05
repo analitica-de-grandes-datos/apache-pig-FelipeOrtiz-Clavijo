@@ -14,3 +14,7 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+A = LOAD '_05/data.tsv' USING PigStorage('\t') AS (c1: chararray, c2: bag {T: tuple(t1:chararray)}, c3: map []);
+B = FOREACH A generate c1, SIZE(c2) as c2, SIZE(c3) as c3;
+C = ORDER B BY c1, c2, c3;
+STORE C into 'output/q7.out';

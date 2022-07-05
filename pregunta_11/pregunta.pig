@@ -32,4 +32,6 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-
+A = LOAD '_11/data.csv' USING PigStorage(',') AS (id:int, firstname:chararray, lastname:chararray, birthday:chararray, color:chararray, level:int);
+B = FOREACH B generate lastname, UPPER(lastname) as upper_lastname, LOWER(lastname) as lower_lastname;
+STORE C into 'output/q11.out';

@@ -19,4 +19,6 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-
+A = LOAD '_25/data.csv' USING PigStorage(',') AS (id:int, firstname:chararray, lastname:chararray, dob:chararray, color:chararray, level:int);
+B = FOREACH A generate INDEXOF(firstname, 'a', 1);
+STORE C into 'output/q25.out';

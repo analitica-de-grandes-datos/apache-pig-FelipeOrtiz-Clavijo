@@ -22,4 +22,6 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-
+A = LOAD '_28/data.csv' USING PigStorage(',') AS (c1:int, c2:chararray, c3:chararray, c4:chararray, c5:chararray, c6:int);
+B = FOREACH A generate GetYear(ToDate(c4,'yyyy-MM-dd')) as yyyy, ToString(ToDate(c4,'yyyy-MM-dd'), 'YY') as yy;
+STORE B into 'output/q28.out';

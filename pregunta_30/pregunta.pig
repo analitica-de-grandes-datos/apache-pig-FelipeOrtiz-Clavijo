@@ -33,4 +33,7 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+A = LOAD '_30/data.csv' USING PigStorage(',') AS (c1:int, c2:chararray, c3:chararray, c4:chararray, c5:chararray, c6:int);
+B = FOREACH A generate c4, SUBSTRING(c4, 8,10) as dd1, GetDay(ToDate(c4,'yyyy-MM-dd')) as dd2, ToString(ToDate(c4,'yyyy-MM-dd'), 'EEE') as dayname1, ToString(ToDate(c4,'yyyy-MM-dd'), 'EEEEE') as dayname2;
+STORE B into 'output/q30.out';
 
