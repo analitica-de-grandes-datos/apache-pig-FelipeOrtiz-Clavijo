@@ -33,4 +33,9 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-
+A = LOAD '_29/data.csv' USING PigStorage(',') AS (c1:int, c2:chararray, c3:chararray, c4:chararray, c5:chararray, c6:int);
+B = FOREACH A generate c4,
+ ToString(ToDate(c4,'yyyy-MM-dd'), 'MMM') as mmm, 
+ SUBSTRING(c4, 5,7) as mm1, 
+ GetMonth(ToDate(c4,'yyyy-MM-dd')) as mm2;
+STORE B into 'output/q29.out';
